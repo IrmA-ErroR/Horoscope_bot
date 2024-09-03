@@ -34,5 +34,5 @@ docker rm -f astro_bot
 docker rmi astrolog_bot
 docker build -t astrolog_bot .
 docker run --name astro_bot -d astrolog_bot
-docker logs astro_bot
+docker logs -f astro_bot
 ```
