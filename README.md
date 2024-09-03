@@ -10,25 +10,28 @@
 
 ## Реализация
 
-Команды для дебага: 
-
-```bash
-docker logs astro_bot
-docker ps -a | grep bot
-docker rm -f astro_bot
-```
-
-```bash
-docker images | grep bot
-docker rmi astrolog_bot
-```
-
+#### Команды для дебага: 
+Собрать образ из текущей директории, собрать и запустить контейнер
 ```bash
 docker build -t astrolog_bot .
 docker run --name astro_bot -d astrolog_bot
 ```
+<br><br>Если что-то не так:
 
-Пересобрать образ и запустить контейнер: 
+1. Проверить запущен ли контейнер, посмотреть логи
+```bash
+docker ps | grep astro_bot
+docker logs astro_bot
+```
+
+2. Проверить наличие образа:
+```bash
+docker images | grep astrolog_bot
+```
+
+3. Пересобрать образ и запустить контейнер: 
+
+*(сразу смотреть логи)*
 ```bash
 docker rm -f astro_bot
 docker rmi astrolog_bot

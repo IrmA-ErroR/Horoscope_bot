@@ -7,6 +7,25 @@ from main import AstroStates
 
 from config import config
 import functions
+# import keyboard
+
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
+def create_forecast_keyboard():
+    keyboard = InlineKeyboardMarkup(row_width=2)
+    buttons = [
+        InlineKeyboardButton(text="Прогноз на день", callback_data="daily_forecast"),
+        InlineKeyboardButton(text="Прогноз на неделю", callback_data="weekly_forecast"),
+        InlineKeyboardButton(text="Прогноз на месяц", callback_data="monthly_forecast"),
+        InlineKeyboardButton(text="Меню", callback_data="menu")
+    ]
+    keyboard.add(*buttons)
+    return keyboard
+
+
+
+
+
 
 # Инициализация базы данных
 async def initialize_db():
@@ -63,14 +82,12 @@ async def handle_birthdate(message: types.Message, state: FSMContext):
         
         zodiac_sign = functions.get_zodiac_sign(day, month)
         birthdate = f"{day:02}.{month:02}"
-        print(birthdate, '-', zodiac_sign)
         
         await add_user(user_id, full_name, username, birthdate, zodiac_sign)
-        print(f'Пользователь {username} добавлен')
-
-        await message.answer(f"Вы <b>{zodiac_sign}</b>. Хотите узнать гороскоп на сегодня?")
+        start_keyboard=create_forecast_keyboard() # Ошибка
+        await message.answer(f"Вы <b>{zodiac_sign}</b>. Хотите узнать гороскоп на сегодня?", reply_markup=start_keyboard)
+        
         await state.clear()
-        print(f"User {user_id} added with zodiac sign {zodiac_sign}")
 
     except ValueError:
         await message.answer("Пожалуйста, введите дату в правильном формате (дд.мм).")
@@ -90,4 +107,5 @@ async def handle_start(message: types.Message, state: FSMContext):
         await message.answer("Добро пожаловать! Пожалуйста, введите вашу дату рождения (дд.мм):")
         await state.set_state(AstroStates.waiting_for_birthdate)  
     else:
-        await message.answer(f"Вы зарегистрированы как <b>{user_data['zodiac_sign']}</b>. Хотите узнать гороскоп на сегодня?")
+        start_keyboard=create_forecast_keyboard()
+        await message.answer(f"Вы зарегистрированы как <b>{user_data['zodiac_sign']}</b>. Хотите узнать гороскоп на сегодня?", reply_markup=start_keyboard)
