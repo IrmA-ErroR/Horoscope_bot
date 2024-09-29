@@ -63,7 +63,7 @@ async def handle_birthdate(message: types.Message, state: FSMContext):
         if not (1 <= day <= 31 and 1 <= month <= 12):
             raise ValueError("Неправильная дата.")
         
-        zodiac_sign = functions.get_zodiac_sign(day, month)
+        zodiac_sign = functions.get_zodiac_sign(day, month)[0]
         birthdate = f"{day:02}.{month:02}"
         
         await add_user(user_id, full_name, username, birthdate, zodiac_sign)
