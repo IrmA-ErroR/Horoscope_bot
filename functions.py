@@ -81,8 +81,8 @@ if __name__ == "__main__":
     daily_horoscope = get_horoscope_by_day(zodiac_sign_number, day)
     print(f"Гороскоп на день для {zodiac_sign}: \n{daily_horoscope}\n")
 
-    # weekly_horoscope = get_horoscope_by_week(zodiac_sign_number)
-    # print(f"Гороскоп на неделю для {zodiac_sign}: \n{weekly_horoscope}\n")
+    weekly_horoscope = get_horoscope_by_week(zodiac_sign_number)
+    print(f"Гороскоп на неделю для {zodiac_sign}: \n{weekly_horoscope}\n")
 
-    # monthly_horoscope = get_horoscope_by_month(zodiac_sign_number)
-    # print(f"Гороскоп на месяц для {zodiac_sign}: \n{monthly_horoscope}")
+    monthly_horoscope = get_horoscope_by_month(zodiac_sign_number)
+    print(f"Гороскоп на месяц для {zodiac_sign}: \n{monthly_horoscope}")

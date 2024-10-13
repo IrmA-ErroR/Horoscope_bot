@@ -7,6 +7,7 @@ from config import config
 ### handlers
 import user
 import keyboard_callback
+import keyboard
 
 import asyncio
 import aiosqlite
@@ -35,7 +36,9 @@ async def main():
     await user.initialize_db()
     
     dp.message.register(user.handle_start, Command("start"))
-    dp.message.register(user.handle_birthdate, StateFilter(AstroStates.waiting_for_birthdate))    
+    dp.message.register(user.handle_birthdate, StateFilter(AstroStates.waiting_for_birthdate)) 
+    dp.message.register(keyboard.handle_menu_message, lambda message: message.text == "Меню")   
+    dp.callback_query.register(keyboard_callback.handle_callback)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":

@@ -69,7 +69,7 @@ async def handle_birthdate(message: types.Message, state: FSMContext):
         await add_user(user_id, full_name, username, birthdate, zodiac_sign)
 
         start_keyboard=keyboard.create_forecast_keyboard() 
-        await message.answer(f"Вы <b>{zodiac_sign}</b>. Хотите узнать гороскоп на сегодня?", reply_markup=start_keyboard)        
+        await message.answer(f"Ваш знак зодиака <b>{zodiac_sign}</b>. Хотите узнать гороскоп на сегодня?", reply_markup=start_keyboard)        
         await state.clear()
 
     except ValueError:
